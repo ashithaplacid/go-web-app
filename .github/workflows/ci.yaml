@@ -25,7 +25,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: action-setup-golangci-lint
-        uses: golangci/golangci-lint@v6
+        uses: golangci/golangci-lint@v3
         with:
           version: v0.1.0
           
