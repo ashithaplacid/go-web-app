@@ -25,9 +25,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: action-setup-golangci-lint
-        uses: golangci/golangci-lint@v6
+        uses: nickhstr/action-setup-golangci-lint@v0.1.0
         with:
-          version: v1.56.2
+          version: v0.1.0
           
   push_to_registry:
     name: Push Docker image to Docker Hub
