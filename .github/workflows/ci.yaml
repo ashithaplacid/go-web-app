@@ -58,18 +58,24 @@ jobs:
             tags: ${{ secrets.DOCKER_USERNAME }}/go-web-app:${{github.run_id}}
 
   update_tag_in_helm_chart:
-   runs-on: ubuntu-latest
-   needs: push_to_registry
-   steps:  
-      - name: Check out the repo
-        uses: actions/checkout@v3
-        with:
+    runs-on: ubuntu-latest
+    needs: push_to_registry
+    permissions:
+      contents: write
+
+    steps:  
+       - name: Check out the repo
+         uses: actions/checkout@v3
+         with:
           github_token: ${{ secrets.TOKEN }}
-      - name: Update tag in values.yml 
-        run: |
-            sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-web-app-chart/values.yaml   
-      - name: commit and push
-        run: |
+
+
+       - name: Update tag in values.yml 
+         run: |
+            sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-web-app-chart/values.yaml  
+
+       - name: commit and push
+         run: |
             git config --global user.email "ashithaplacid@gmail.com"
             git config --global user.name "Ashitha Placid"
             git add helm/go-web-app-chart/values.yaml
