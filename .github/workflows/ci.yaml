@@ -63,6 +63,8 @@ jobs:
    steps:  
       - name: Check out the repo
         uses: actions/checkout@v3
+        with:
+          github_token: ${{ secrets.TOKEN }}
       - name: Update tag in values.yml 
         run: |
             sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-web-app-chart/values.yaml   
@@ -73,3 +75,4 @@ jobs:
             git add helm/go-web-app-chart/values.yaml
             git commit -m "Updated he tag in helm values.yaml"       
             git push  
+ 
